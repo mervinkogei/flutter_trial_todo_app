@@ -24,6 +24,7 @@ class CustomPageRoute extends MaterialPageRoute {
 
 class _DashBoardScreenState extends State<DashBoardScreen>  with WidgetsBindingObserver{
 
+/// Add Navigators keys for the Bottom Navigation Items
 final List<GlobalKey<NavigatorState>> _navigatorKeys = [
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
@@ -41,37 +42,39 @@ final List<GlobalKey<NavigatorState>> _navigatorKeys = [
   Widget build(BuildContext context) {
       return Scaffold(
         resizeToAvoidBottomInset: true,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         bottomNavigationBar: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
             child: SizedBox(
-          height: 100,
+          height: 90,
           child: BottomNavigationBar(
             selectedFontSize: 13,
             unselectedFontSize: 13,
             type: BottomNavigationBarType.fixed,
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Colors.black,
             showUnselectedLabels: true,
             showSelectedLabels: true,
             items:  const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon:  Icon(Icons.home),
-                activeIcon: Icon(Icons.home, color: Colors.blue,),
+                activeIcon: Icon(Icons.home, color: Colors.white,),
                 label: "Home",
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.task),
-                activeIcon:  Icon(Icons.task, color: Colors.blue,),
+                activeIcon:  Icon(Icons.task, color: Colors.white,),
                 label: 'Tasks',
               ),
              BottomNavigationBarItem(
                 icon: Icon(Icons.person),
-                activeIcon: Icon(Icons.person, color: Colors.blue,),
+                activeIcon: Icon(Icons.person, color: Colors.white,),
                 label: 'Profile',
               ),
             ],
             currentIndex: _selectedIndex,
-            selectedItemColor: Colors.blue,
-            unselectedItemColor: Colors.amberAccent,
+            selectedItemColor: Colors.white,
+            selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+            unselectedItemColor: Colors.grey,
             onTap: (index) {
               Navigator.pushReplacement(
                   context,
@@ -84,15 +87,12 @@ final List<GlobalKey<NavigatorState>> _navigatorKeys = [
             },
           ),
         )),
-        body: Container(
-          // decoration: Color.green,
-          child: Stack(
-            children: [
-              _buildOffstageNavigator(0),
-              _buildOffstageNavigator(1),
-              _buildOffstageNavigator(2),
-            ],
-          ),
+        body: Stack(
+          children: [
+            _buildOffstageNavigator(0),
+            _buildOffstageNavigator(1),
+            _buildOffstageNavigator(2),
+          ],
         ),
       );
   }  
