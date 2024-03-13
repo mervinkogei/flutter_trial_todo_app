@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       drawer: Drawer(),
       body:  Padding(
-        padding: EdgeInsets.only(left:20.0, right: 20),
+        padding: const EdgeInsets.only(left:20.0, right: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -43,8 +43,61 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.only(top: 5.0),
               child: Text(' What are you doing Today!'),
             ),
-            // SearchBar(hintText: "Your recent task here..",)
-            SearchBarWidget()
+            
+            /**
+             * Added a a custom Widget of SearchBar
+             */
+            SearchBarWidget(),
+
+           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+               const Text(' Today\'s Task!',style: ThemeStyling.welcomeTitle,),
+               const Text(' see all >'),
+            ],
+           ),
+
+           Column(
+             children: [
+               GridView.count(
+                shrinkWrap: true,
+                  crossAxisCount: 2,
+                  children: List.generate(4, (index) {
+                    return Card(
+                      color: Colors.blue[50],
+                      child: Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.bookmark_add_outlined),
+                            Text('Reading Article', style: ThemeStyling.taskCardTitle,),
+                            SizedBox(height: 5,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                              Text('Deadline:'),
+                              Text('4pm'),
+                            ],),
+
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)
+                                  )
+                                ),
+                                onPressed: (){}, child: Text('Complete a Task',textAlign: TextAlign.center,)),
+                            )
+                          ],
+                        ),
+                      ),
+                    );                      
+                }            
+              )),
+             ],
+           )
           ],
         ),
       )
