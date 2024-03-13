@@ -21,20 +21,18 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: SplashView(
-         gradient: LinearGradient(
+         gradient: const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: <Color>[Colors.green, Colors.blue]),
-        // backgroundColor: Colors.red,
-        loadingIndicator: RefreshProgressIndicator(),
+        colors: <Color>[Colors.grey, Colors.black54]),
         duration: const Duration(seconds: 4),
-        title: Text('Welcome to TODO App'),
+        title: const Text('Welcome to TODO App', style: TextStyle(color: Colors.white),),
         logo: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: FlutterLogo(size: 40,),
+          child: Image.asset('images/logo.png'),
         ),
         done: Done(
-          HomeScreen(),
+          const HomeScreen(),
            curve: Curves.linearToEaseOut,
           ),
       ),
