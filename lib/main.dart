@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:splash_view/source/presentation/pages/splash_view.dart';
 import 'package:splash_view/source/presentation/widgets/done.dart';
-import 'package:trial_todo_app/Screens/home.dart';
+import 'package:trial_todo_app/Screens/dashboard_nav.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,7 +10,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,8 +19,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+
+      /**
+       * Splash Screen starts Here
+       */
       home: SplashView(
-         gradient: const LinearGradient(
+        gradient: const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: <Color>[Colors.grey, Colors.black54]),
@@ -31,8 +34,11 @@ class MyApp extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Image.asset('images/logo.png'),
         ),
+        /**
+         * Once the splash screen is loaded, Home screen is the loaded next
+         */
         done: Done(
-          const HomeScreen(),
+          const DashBoardScreen(),
            curve: Curves.linearToEaseOut,
           ),
       ),
