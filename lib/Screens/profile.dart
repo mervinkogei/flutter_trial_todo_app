@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trial_todo_app/Utils/data_function.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -12,6 +13,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      drawer: DataFunction.customMenuDrawer(context),
       body: Center(
         child: Text('Profile'),
       ),

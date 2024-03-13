@@ -32,4 +32,69 @@ class DataFunction{
     },
   );
 }
+static customMenuDrawer(BuildContext context){
+  return Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+                UserAccountsDrawerHeader(
+        decoration: BoxDecoration(color: const Color(0xff000000)),
+        accountName: Text(
+          "Kogei Vincent",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        accountEmail: Text(
+          "vincentkogei@gmail.com",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        currentAccountPicture: Image.asset('images/avatar.png'),
+      ),
+            ListTile(
+              leading: const Icon(
+                Icons.home,
+              ),
+              title: const Text('Home'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.list,
+              ),
+              title: const Text('Task'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.person,
+              ),
+              title: const Text('Profile'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            Divider(color: Colors.blue[200]),
+
+             ListTile(
+              leading: const Icon(
+                Icons.logout_outlined,
+              ),
+              title: const Text('Logout'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      );
+       
+}
+
 }
