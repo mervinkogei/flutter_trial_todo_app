@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         end: Alignment.bottomCenter,
         colors: <Color>[Colors.grey, Colors.black54]),
         duration: const Duration(seconds: 4),
-        title: const Text('Welcome to TODO App', style: TextStyle(color: Colors.white),),
+        title: const Text('Welcome to TODO App', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
         logo: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Image.asset('images/logo.png'),
