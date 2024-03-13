@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:trial_todo_app/widgets/searchBar_widget.dart';
 
 import '../Utils/textStyling.dart';
 
@@ -32,11 +33,18 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       drawer: Drawer(),
-      body: const Padding(
+      body:  Padding(
         padding: EdgeInsets.only(left:20.0, right: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(' Welcome To\n Task Manager!',style: ThemeStyling.welcomeTitle,)
+            const Text(' Welcome To\n Task Manager!',style: ThemeStyling.welcomeTitle,),
+            const Padding(
+              padding: EdgeInsets.only(top: 5.0),
+              child: Text(' What are you doing Today!'),
+            ),
+            // SearchBar(hintText: "Your recent task here..",)
+            SearchBarWidget()
           ],
         ),
       )
