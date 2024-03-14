@@ -19,7 +19,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
     return Scaffold(
       body: Column(
         children: [
-          CustomTextField(controller: name, obscure: obscure)
+          CustomTextField(controller: nameController, obscure: false)
         ],
       ),
     );

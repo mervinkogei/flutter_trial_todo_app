@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trial_todo_app/Screens/login.dart';
 import 'package:trial_todo_app/Utils/textStyling.dart';
 
 class DataFunction{
@@ -38,14 +39,14 @@ static customMenuDrawer(BuildContext context){
           padding: EdgeInsets.zero,
           children: [
                 UserAccountsDrawerHeader(
-        decoration: BoxDecoration(color: const Color(0xff000000)),
-        accountName: Text(
+        decoration: const BoxDecoration(color: Color(0xff000000)),
+        accountName: const Text(
           "Kogei Vincent",
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
         ),
-        accountEmail: Text(
+        accountEmail: const Text(
           "vincentkogei@gmail.com",
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -88,7 +89,9 @@ static customMenuDrawer(BuildContext context){
               ),
               title: const Text('Logout'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const LoginScreen()),
+            (route) => false);
               },
             ),
           ],
