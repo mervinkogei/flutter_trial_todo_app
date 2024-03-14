@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trial_todo_app/Utils/app_Colors.dart';
 
+// ignore: must_be_immutable
 class CustomCheckBox extends StatefulWidget {
   CustomCheckBox({required this.checked, super.key});
   bool checked;

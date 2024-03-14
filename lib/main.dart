@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:splash_view/source/presentation/pages/splash_view.dart';
 import 'package:splash_view/source/presentation/widgets/done.dart';
 import 'package:trial_todo_app/Screens/dashboard_nav.dart';
+import 'package:trial_todo_app/Screens/login.dart';
 
 Future<void> main() async {
    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
          * Once the splash screen is loaded, Home screen is the loaded next
          */
         done: Done(
-          const DashBoardScreen(),
+          const LoginScreen(),
            curve: Curves.linearToEaseOut,
           ),
       ),

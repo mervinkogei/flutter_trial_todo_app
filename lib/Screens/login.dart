@@ -14,13 +14,17 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-TextEditingController emailController = TextEditingController();
-TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
-loginUser(){
-  
-}
+  loginUser() {
+    if (_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Processing Data')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +40,10 @@ loginUser(){
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  
                   const SizedBox(height: 30),
                   const Text(
-                    'Welcome back 👋', style: ThemeStyling.welcomeTitle,
+                    'Welcome back 👋',
+                    style: ThemeStyling.welcomeTitle,
                   ),
                   const Text(
                     'Please enter your email & password to sign in.',
@@ -50,15 +54,20 @@ loginUser(){
                   const Text(
                     'Email',
                   ),
-                  CustomTextField(controller: emailController, obscure: false),
+                  CustomTextField(controller: emailController, obscure: false, hintText: 'email',),
                   const SizedBox(
                     height: 20,
                   ),
                   const Text(
                     'Password',
                   ),
-            CustomTextField(controller: passwordController, obscure: true, visibilityIcon: true,),
-            const SizedBox(height: 20),
+                  CustomTextField(
+                    controller: passwordController,
+                    obscure: true,
+                    visibilityIcon: true,
+                    hintText: 'password',
+                  ),
+                  const SizedBox(height: 20),
                   Row(
                     children: [
                       CustomCheckBox(
@@ -68,13 +77,14 @@ loginUser(){
                       const Text(
                         'Remember me',
                       ),
-                     const Spacer(),
+                      const Spacer(),
                       InkWell(
-                      onTap: () {},
-                      child: const Text(
-                        'Forgot password?', style: ThemeStyling.forgotPasswordText,
+                        onTap: () {},
+                        child: const Text(
+                          'Forgot password?',
+                          style: ThemeStyling.forgotPasswordText,
+                        ),
                       ),
-                                          ),
                     ],
                   ),
                   const SizedBox(
@@ -93,12 +103,16 @@ loginUser(){
                       const SizedBox(width: 8),
                       InkWell(
                         onTap: () {
-                          Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => const SignUpScreen()),
-                        (route) => false);
+                          Navigator.of(context, rootNavigator: true)
+                              .pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SignUpScreen()),
+                                  (route) => false);
                         },
                         child: const Text(
-                          'Sign up', style: ThemeStyling.signUpText,
+                          'Sign up',
+                          style: ThemeStyling.signUpText,
                         ),
                       ),
                     ],
@@ -106,12 +120,11 @@ loginUser(){
                   const SizedBox(
                     height: 30,
                   ),
-                 
                   const SizedBox(
                     height: 20,
                   ),
                   CustomElevatedButtton(
-                    callback: ()=> loginUser(),
+                    callback: () => loginUser(),
                     labelTitle: 'Sign in',
                   ),
                 ],
@@ -123,4 +136,3 @@ loginUser(){
     );
   }
 }
-
