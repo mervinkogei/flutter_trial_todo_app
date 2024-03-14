@@ -47,7 +47,7 @@ final List<GlobalKey<NavigatorState>> _navigatorKeys = [
         bottomNavigationBar: ClipRRect(
           borderRadius: BorderRadius.circular(20),
             child: SizedBox(
-          height: 90,
+          height: 100,
           child: BottomNavigationBar(
             selectedFontSize: 13,
             unselectedFontSize: 13,

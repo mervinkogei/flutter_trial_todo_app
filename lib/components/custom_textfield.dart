@@ -15,9 +15,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
   FocusNode myfocus = FocusNode();
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 0), () {
-      myfocus.requestFocus(); 
-    });
+    // Future.delayed(const Duration(seconds: 0), () {
+    //   myfocus.requestFocus(); 
+    // });
     super.initState();
   }
 

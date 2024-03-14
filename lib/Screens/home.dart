@@ -20,17 +20,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
 @override
   void initState() {
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.white
-            //color set to transperent or set your own color
-            ));
-
     return Scaffold(
         appBar: AppBar(
           actions: [

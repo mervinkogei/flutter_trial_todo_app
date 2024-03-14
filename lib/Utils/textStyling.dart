@@ -7,6 +7,9 @@ abstract class ThemeStyling {
   static const TextStyle taskCardTitle = TextStyle(
       fontWeight: FontWeight.bold, fontSize: 16, fontFamily: "Roboto");
 
+  static const TextStyle buttonText = TextStyle(
+      fontWeight: FontWeight.bold, fontSize: 16, fontFamily: "Roboto", color: Colors.black);
+
   static const TextStyle deleteAlert = TextStyle(
       fontWeight: FontWeight.bold, fontSize: 16, fontFamily: "Roboto", color: Colors.red);
 

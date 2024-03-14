@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:trial_todo_app/Utils/data_function.dart';
 import 'package:trial_todo_app/Utils/textStyling.dart';
+import 'package:trial_todo_app/components/custom_elavatedButton.dart';
 import 'package:trial_todo_app/components/custom_textfield.dart';
 
 class TasksScreen extends StatefulWidget {
@@ -46,79 +47,84 @@ class _TasksScreenState extends State<TasksScreen> {
           centerTitle: true,
         ),
         drawer: DataFunction.customMenuDrawer(context),
-        body: Padding(
-          padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                ' Task Name',
-                style: ThemeStyling.welcomeTitle,
-              ),
-              CustomTextField(controller: taskNameController, obscure: false),
-              const SizedBox(height: 10,),
-              const Text(
-                ' Task Description',
-                style: ThemeStyling.welcomeTitle,
-              ),
-              CustomTextField(
-                controller: taskDescriptionController,
-                obscure: false,
-                maxLines: 5,
-              ),
-              const SizedBox(height: 20,),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                            controller: startDateController,
-                            decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide:
-                                      const BorderSide(color: Colors.black),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  gapPadding: 6,
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(
-                                      color: Theme.of(context).primaryColor,
-                                      width: 2),
-                                ),
-                                suffixIcon: Icon(Icons.calendar_today),
-                                labelText: "Start Date"),
-                            readOnly: true,
-                            onTap: () => pickDateDialog(startDateController)),
-                      ),
-                      const SizedBox(width: 10,),
-                      Expanded(
-                        child: TextField(
-                            controller: endDateController,
-                            decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide:
-                                      const BorderSide(color: Colors.black),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  gapPadding: 6,
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(
-                                      color: Theme.of(context).primaryColor,
-                                      width: 2),
-                                ),
-                                suffixIcon: Icon(Icons.calendar_today),
-                                labelText: "End Date"),
-                            readOnly: true,
-                            onTap: () => pickDateDialog(endDateController)),
-                      )
-                    ],
-                  ),
-                ],
-              )
-            ],
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  ' Task Name',
+                  style: ThemeStyling.welcomeTitle,
+                ),
+                CustomTextField(controller: taskNameController, obscure: false),
+                const SizedBox(height: 10,),
+                const Text(
+                  ' Task Description',
+                  style: ThemeStyling.welcomeTitle,
+                ),
+                CustomTextField(
+                  controller: taskDescriptionController,
+                  obscure: false,
+                  maxLines: 5,
+                ),
+                const SizedBox(height: 20,),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                              controller: startDateController,
+                              decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    borderSide:
+                                        const BorderSide(color: Colors.black),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    gapPadding: 6,
+                                    borderRadius: BorderRadius.circular(15),
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context).primaryColor,
+                                        width: 2),
+                                  ),
+                                  suffixIcon: Icon(Icons.calendar_today),
+                                  labelText: "Start Date"),
+                              readOnly: true,
+                              onTap: () => pickDateDialog(startDateController)),
+                        ),
+                        const SizedBox(width: 10,),
+                        Expanded(
+                          child: TextField(
+                              controller: endDateController,
+                              decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    borderSide:
+                                        const BorderSide(color: Colors.black),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    gapPadding: 6,
+                                    borderRadius: BorderRadius.circular(15),
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context).primaryColor,
+                                        width: 2),
+                                  ),
+                                  suffixIcon: Icon(Icons.calendar_today),
+                                  labelText: "End Date"),
+                              readOnly: true,
+                              onTap: () => pickDateDialog(endDateController)),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 30,),
+               CustomElevatedButtton(callback: (){}, labelTitle: 'Create Task',)
+              ],
+            ),
           ),
         ));
   }

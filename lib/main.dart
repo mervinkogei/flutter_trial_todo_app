@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:splash_view/source/presentation/pages/splash_view.dart';
 import 'package:splash_view/source/presentation/widgets/done.dart';
 import 'package:trial_todo_app/Screens/dashboard_nav.dart';
 
-void main() {
+Future<void> main() async {
+   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
   runApp(const MyApp());
 }
 
