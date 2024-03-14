@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:trial_todo_app/Screens/dashboard_nav.dart';
 import 'package:trial_todo_app/Screens/login.dart';
 import 'package:trial_todo_app/Utils/app_Colors.dart';
 import 'package:trial_todo_app/Utils/textStyling.dart';
@@ -20,6 +22,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
+  signupUser() {
+    if (_formKey.currentState!.validate()) {
+      if(passwordController.text != confirmPasswordController.text){
+        Fluttertoast.showToast(msg: "Password is not Matching, Please Confirm Password Again!");
+      }else{
+        ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Processing Data')),
+      ).closed.then((value) => 
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const DashBoardScreen())));   ;
+      }
+      
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  
+                children: [                  
                   const SizedBox(height: 30),
                   const Text(
                     'Hi There, Lets Onboard you 👋', style: ThemeStyling.welcomeTitle,
@@ -50,28 +65,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                    const Text(
                     'Name',
                   ),
-                  CustomTextField(controller: nameController, obscure: false),
+                  CustomTextField(controller: nameController, obscure: false, hintText: 'name',),
                   const SizedBox(
                     height: 10,
                   ),
                   const Text(
                     'Email',
                   ),
-                  CustomTextField(controller: emailController, obscure: false),
+                  CustomTextField(controller: emailController, obscure: false, hintText: 'email',),
                   const SizedBox(
                     height: 10,
                   ),
                   const Text(
                     'Password',
                   ),
-            CustomTextField(controller: passwordController, obscure: true, visibilityIcon: true,),
+            CustomTextField(controller: passwordController, obscure: true, visibilityIcon: true, hintText: 'password',),
              const SizedBox(
                     height: 10,
                   ),
             const Text(
                     'ConfirmPassword',
                   ),
-            CustomTextField(controller: confirmPasswordController, obscure: true, visibilityIcon: true,),
+            CustomTextField(controller: confirmPasswordController, obscure: true, visibilityIcon: true, hintText: 'confirm password',),
             const SizedBox(height: 10),
                   Row(
                     children: [
@@ -119,7 +134,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 20,
                   ),
                   CustomElevatedButtton(
-                    callback: () async {},
+                    callback: () => signupUser(),
                     labelTitle: 'Sign Up',
                   ),
                 ],

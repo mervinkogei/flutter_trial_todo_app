@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trial_todo_app/Screens/dashboard_nav.dart';
 import 'package:trial_todo_app/Screens/signup.dart';
 import 'package:trial_todo_app/Utils/app_Colors.dart';
 import 'package:trial_todo_app/Utils/textStyling.dart';
@@ -22,8 +23,10 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Processing Data')),
-      );
+      ).closed.then((value) => 
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const DashBoardScreen())));      
     }
+    
   }
 
   @override
