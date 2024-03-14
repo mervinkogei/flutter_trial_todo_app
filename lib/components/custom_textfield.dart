@@ -5,7 +5,8 @@ class CustomTextField extends StatefulWidget {
   TextEditingController? controller;
   int? maxLines;
   bool obscure;
-  CustomTextField({required this.controller, required this.obscure, this.maxLines});
+  bool? visibilityIcon;
+  CustomTextField({required this.controller, required this.obscure, this.maxLines, this.visibilityIcon});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -26,7 +27,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return Padding(
       padding: const EdgeInsets.all(5),
       child: TextField(
-        // inputFormatters:[FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9.@]'))],
         obscureText: widget.obscure,
         maxLines: widget.maxLines ?? 1,
         controller: widget.controller,
@@ -35,6 +35,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
         style: const TextStyle(height:1),
         focusNode: myfocus,
         decoration: InputDecoration(
+          suffixIcon: widget.visibilityIcon == true ? InkWell(
+            onTap: (){
+             setState(() {
+                widget.obscure = !widget.obscure;
+             });
+            },
+            child: InkWell(child: Icon(!widget.obscure? Icons.visibility: Icons.visibility_off))) : null,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
             borderSide: const BorderSide(color: Colors.black),

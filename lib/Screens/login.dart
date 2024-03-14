@@ -52,7 +52,7 @@ TextEditingController passwordController = TextEditingController();
                   const Text(
                     'Password',
                   ),
-            CustomTextField(controller: passwordController, obscure: true),
+            CustomTextField(controller: passwordController, obscure: true, visibilityIcon: true,),
             const SizedBox(height: 20),
                   Row(
                     children: [
@@ -67,7 +67,7 @@ TextEditingController passwordController = TextEditingController();
                       InkWell(
                       onTap: () {},
                       child: const Text(
-                        'Forgot password?',
+                        'Forgot password?', style: ThemeStyling.forgotPasswordText,
                       ),
                                           ),
                     ],
@@ -88,8 +88,8 @@ TextEditingController passwordController = TextEditingController();
                       const SizedBox(width: 8),
                       InkWell(
                         onTap: () {},
-                        child: Text(
-                          'Sign up',
+                        child: const Text(
+                          'Sign up', style: ThemeStyling.signUpText,
                         ),
                       ),
                     ],
