@@ -4,8 +4,8 @@ class Task {
    int? id;
    String taskName;
    String description;
-   DateTime? startDate;
-   DateTime? endDate;
+   String? startDate;
+   String? endDate;
    User? user;
 
    Task({
@@ -40,6 +40,7 @@ class Task {
       'description': description,
       'startDate': startDate,
       'endDate': endDate,
+      'user': user != null ? user?.toMap() : null,
    };
 
 }

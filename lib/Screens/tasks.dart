@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:quickeydb/quickeydb.dart';
+import 'package:trial_todo_app/Database/Models/task_model.dart';
+import 'package:trial_todo_app/Database/Models/user_model.dart';
+import 'package:trial_todo_app/Database/Schema/task_schema.dart';
 import 'package:trial_todo_app/Screens/dashboard_nav.dart';
 import 'package:trial_todo_app/Utils/data_function.dart';
 import 'package:trial_todo_app/Utils/textStyling.dart';
@@ -41,14 +45,25 @@ class _TasksScreenState extends State<TasksScreen> {
     }
   }
 
-addTask() {
+addTask() async{
   if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Processing Data')),
-      ).closed.then((value) => 
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const DashBoardScreen())));      
-    }
-
+    return await QuickeyDB.getInstance!<TaskSchema>()?.create(
+      Task(
+          id: DateTime.now().microsecondsSinceEpoch,
+          taskName: taskNameController.text,
+          description: taskDescriptionController.text,
+          startDate: startDateController.text,
+          endDate: endDateController.text,
+          user: User(name: "vincent", email: "vincentkogei@gmail.com")
+          )).then((value) => 
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Processing Data')),
+          ).closed.then((value) => 
+          Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const DashBoardScreen()),
+            (route) => false))      
+      );  
+  }
 }
 
   @override
@@ -72,7 +87,7 @@ addTask() {
                     ' Task Name',
                     style: ThemeStyling.welcomeTitle,
                   ),
-                  CustomTextField(controller: taskNameController, obscure: false, hintText: 'task',),
+                  CustomTextField(controller: taskNameController, obscure: false, hintText: 'task title',),
                   const SizedBox(height: 10,),
                   const Text(
                     ' Task Description',
@@ -104,6 +119,11 @@ addTask() {
                                       borderSide:
                                           const BorderSide(color: Colors.black),
                                     ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide:
+                                          const BorderSide(color: Colors.black),
+                                    ),
                                     focusedBorder: OutlineInputBorder(
                                       gapPadding: 6,
                                       borderRadius: BorderRadius.circular(15),
@@ -127,6 +147,11 @@ addTask() {
                                   return null;
                                 },
                                 decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide:
+                                          const BorderSide(color: Colors.black),
+                                    ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
                                       borderSide:

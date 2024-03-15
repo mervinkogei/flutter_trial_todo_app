@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:quickeydb/builder/query_method.dart';
 import 'package:quickeydb/quickeydb.dart';
 import 'package:trial_todo_app/Database/Models/user_model.dart';
 import 'package:trial_todo_app/Database/Schema/user_schema.dart';
