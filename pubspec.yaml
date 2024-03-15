@@ -44,7 +44,7 @@ dependencies:
   fluttertoast: ^8.2.4
   quickeydb: ^1.2.0+8
   activity: ^1.5.3+5
-  # sqflite: ^2.3.0
+  flutter_easyloading: ^3.0.5
   # path: ^1.9.0
 
 dev_dependencies:

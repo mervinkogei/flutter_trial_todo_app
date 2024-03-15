@@ -18,8 +18,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: const Text('Your Profile', style: ThemeStyling.welcomeTitle),
       ),
       drawer: DataFunction.customMenuDrawer(context),
-      body: Center(
-        child: Text('Profile'),
+      body: Column(
+        children: [
+          
+        ],
       ),
     );
   }
