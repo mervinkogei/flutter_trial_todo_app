@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quickeydb/quickeydb.dart';
+import 'package:trial_todo_app/Database/Schema/task_schema.dart';
 import 'package:trial_todo_app/Database/Schema/user_schema.dart';
 import 'package:trial_todo_app/Utils/data_function.dart';
 import 'package:trial_todo_app/widgets/searchBar_widget.dart';
@@ -17,15 +18,31 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
  var itemCounter = 2;
  late UserSchema userItems;
+ List<TaskSchema> tasks =[];
 
  checkUser() async{
   print( await QuickeyDB.getInstance!<UserSchema>()!.findBy({'email': 'mark@gmail.com'}));
  
  }
 
+ Future<void>fetchTasksList() async{
+  final response = await QuickeyDB.getInstance!<TaskSchema>()?.all;
+  //  final results = await database!.rawQuery('SELECT * FROM user');
+  
+  // Extract the response body as a string 
+  print(response);
+  // setState(() {
+  //   tasks = response!.cast<TaskSchema>();
+  // });
+  
+  // return response; 
+
+ }
+
 @override
   void initState() {
-    checkUser();
+    // checkUser();
+    fetchTasksList();
     super.initState();
   }
 

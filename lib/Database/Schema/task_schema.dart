@@ -1,6 +1,6 @@
 import 'package:quickeydb/quickeydb.dart';
 import 'package:trial_todo_app/Database/Models/task_model.dart';
-import 'package:trial_todo_app/Database/Schema/user_schema.dart';
+// import 'package:trial_todo_app/Database/Schema/user_schema.dart';
 
 class TaskSchema extends DataAccessObject<Task> {
    TaskSchema()
@@ -13,13 +13,12 @@ class TaskSchema extends DataAccessObject<Task> {
             description TEXT,
             startDate TEXT,
             endDate TEXT,
-            status TEXT,
             level INTEGER DEFAULT "1" NOT NULL,
             FOREIGN KEY (user_id) REFERENCES user (id)
           )
           ''',
       relations: [
-         const BelongsTo<UserSchema>(),
+        //  const BelongsTo<UserSchema>(),
       ],
       converter: Converter(
          encode: (task) => Task.fromMap(task),

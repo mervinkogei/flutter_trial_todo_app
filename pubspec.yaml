@@ -43,6 +43,7 @@ dependencies:
   intl: ^0.19.0
   fluttertoast: ^8.2.4
   quickeydb: ^1.2.0+8
+  activity: ^1.5.3+5
   # sqflite: ^2.3.0
   # path: ^1.9.0
 
