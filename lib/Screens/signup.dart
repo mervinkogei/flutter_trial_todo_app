@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:quickeydb/builder/query_method.dart';
 import 'package:quickeydb/quickeydb.dart';
 import 'package:trial_todo_app/Database/Models/user_model.dart';
 import 'package:trial_todo_app/Database/Schema/user_schema.dart';
@@ -26,22 +27,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController confirmPasswordController = TextEditingController();
 
   signupUser() async{
+ 
     if (_formKey.currentState!.validate()) {
+
+    if(await QuickeyDB.getInstance!<UserSchema>()!.isExists({'email': emailController.text.trim()})){
+      Fluttertoast.showToast(msg: "Email is Already existing please login");
+    }
       if(passwordController.text != confirmPasswordController.text){
         Fluttertoast.showToast(msg: "Password is not Matching, Please Confirm Password Again!");
       }else{  
+        
         return await QuickeyDB.getInstance!<UserSchema>()?.create(
       User(
         name: nameController.text,
-        email: emailController.text,
+        email: emailController.text.trim(),
         password: passwordController.text,
-      ));     
+      )).then((value) => 
+       ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Processing Data')),
+       ).closed.then((value) => 
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const DashBoardScreen())))
+      
+      );     
        
     }
-     ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Processing Data')),
-      ).closed.then((value) => 
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const DashBoardScreen())));
       }
   }
 
