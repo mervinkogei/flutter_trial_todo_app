@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:quickeydb/quickeydb.dart';
+import 'package:trial_todo_app/Database/Models/user_model.dart';
+import 'package:trial_todo_app/Database/Schema/user_schema.dart';
 import 'package:trial_todo_app/Screens/dashboard_nav.dart';
 import 'package:trial_todo_app/Screens/login.dart';
 import 'package:trial_todo_app/Utils/app_Colors.dart';
@@ -22,20 +25,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
-  signupUser() {
+  signupUser() async{
     if (_formKey.currentState!.validate()) {
       if(passwordController.text != confirmPasswordController.text){
         Fluttertoast.showToast(msg: "Password is not Matching, Please Confirm Password Again!");
-      }else{
-        ScaffoldMessenger.of(context).showSnackBar(
+      }else{  
+        return await QuickeyDB.getInstance!<UserSchema>()?.create(
+      User(
+        name: nameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+      ));     
+       
+    }
+     ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Processing Data')),
       ).closed.then((value) => 
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const DashBoardScreen())));   ;
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const DashBoardScreen())));
       }
-      
-    }
   }
-
 
   @override
   Widget build(BuildContext context) {

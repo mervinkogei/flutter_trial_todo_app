@@ -1,13 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:quickeydb/quickeydb.dart';
 import 'package:splash_view/source/presentation/pages/splash_view.dart';
 import 'package:splash_view/source/presentation/widgets/done.dart';
+import 'package:trial_todo_app/Database/Schema/task_schema.dart';
+import 'package:trial_todo_app/Database/Schema/user_schema.dart';
 import 'package:trial_todo_app/Screens/login.dart';
+// import 'package:quickeydb/memory/memory.dart';
 
 Future<void> main() async {
    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
+
+ WidgetsFlutterBinding.ensureInitialized();
+
+  //  Memory memory = await Memory().initMemory();
+
+  // await memory.setDouble('data', 99.99);
+  // await memory.getDouble('data');
+  // await memory.hasMemory('data');
+
+//  sqfliteFfiInit();
+
+/**
+ * Initialize QuickeyDb to be used Locally
+ */
+
+  await QuickeyDB.initialize(
+    dbName: "QuickeyDB.db",
+    persist: true,
+    dbVersion: 1,
+    dataAccessObjects: [
+      UserSchema(),
+      TaskSchema(),
+    ],
+  );
+
   runApp(const MyApp());
 }
 

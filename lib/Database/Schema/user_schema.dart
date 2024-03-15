@@ -10,7 +10,7 @@ class UserSchema extends DataAccessObject<User> {
             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             email TEXT NOT NULL,
-            password TEXT,
+            password TEXT
           )
           ''',
       relations: [
@@ -23,9 +23,9 @@ class UserSchema extends DataAccessObject<User> {
       ),
    );
 
-   Future<List<User?>> getOldUsers() {
-      return where({'age >= ?': 18}).toList();
-   }
+  //  Future<List<User?>> getOldUsers() {
+  //     return where({'age >= ?': 18}).toList();
+  //  }
 
    Future<List<User>> doRawQuery() async {
       // Use your custom query
