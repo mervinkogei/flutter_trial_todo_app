@@ -9,7 +9,7 @@ class TaskSchema extends DataAccessObject<Task> {
         '''
           CREATE TABLE tasks (
             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
+            user_id INTEGER NOT NULL
             taskName TEXT NOT NULL,
             description TEXT,
             startDate TEXT,

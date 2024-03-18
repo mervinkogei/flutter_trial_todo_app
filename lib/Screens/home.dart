@@ -159,7 +159,7 @@ showAlertDialog(BuildContext context, taskItem) {
                               children: [
                                  
                                  Text(
-                                  '${snapshot.data![index].taskName}',
+                                  'Title: ${snapshot.data![index].taskName}',
                                   style: ThemeStyling.taskCardTitle,
                                 ),
                                 const SizedBox(
