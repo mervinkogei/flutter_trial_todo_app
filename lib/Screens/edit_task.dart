@@ -10,6 +10,7 @@ import 'package:trial_todo_app/Utils/textStyling.dart';
 import 'package:trial_todo_app/components/custom_elavatedButton.dart';
 import 'package:trial_todo_app/components/custom_textfield.dart';
 
+// ignore: must_be_immutable
 class EditTaskScreen extends StatefulWidget {
   String ? taskName;
   int? taskId;

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quickeydb/quickeydb.dart';
-import 'package:trial_todo_app/Database/Models/task_model.dart';
-import 'package:trial_todo_app/Database/Schema/task_schema.dart';
 import 'package:trial_todo_app/Screens/login.dart';
 import 'package:trial_todo_app/Utils/textStyling.dart';
 

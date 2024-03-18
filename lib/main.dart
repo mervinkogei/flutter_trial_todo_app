@@ -6,7 +6,7 @@ import 'package:splash_view/source/presentation/pages/splash_view.dart';
 import 'package:splash_view/source/presentation/widgets/done.dart';
 import 'package:trial_todo_app/Database/Schema/task_schema.dart';
 import 'package:trial_todo_app/Database/Schema/user_schema.dart';
-import 'package:trial_todo_app/Screens/login.dart';
+
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:trial_todo_app/State/controller.dart';
 import 'package:trial_todo_app/State/login_controller.dart';
