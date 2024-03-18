@@ -6,6 +6,7 @@ import 'package:trial_todo_app/Database/Models/task_model.dart';
 import 'package:trial_todo_app/Database/Schema/task_schema.dart';
 import 'package:trial_todo_app/Database/Schema/user_schema.dart';
 import 'package:trial_todo_app/Screens/edit_task.dart';
+import 'package:trial_todo_app/Screens/tasks.dart';
 import 'package:trial_todo_app/Utils/data_function.dart';
 import 'package:trial_todo_app/widgets/searchBar_widget.dart';
 
@@ -127,13 +128,16 @@ showAlertDialog(BuildContext context, taskItem) {
                * Added a a custom Widget of SearchBar
                */
                 SearchBarWidget(),
-                 const Row(
+                  Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       ' Task List!',
                       style: ThemeStyling.welcomeTitle,
                     ),
+                    ElevatedButton.icon(onPressed: ()=> 
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context)=> const TasksScreen())), icon: Icon(Icons.add), label: Text('Add Task'))
                     ],
                 ),
                 const SizedBox(height: 10,),         

@@ -4,7 +4,8 @@ import 'package:quickeydb/quickeydb.dart';
 import 'package:trial_todo_app/Database/Models/user_model.dart';
 import 'package:trial_todo_app/Database/Schema/user_schema.dart';
 import 'package:trial_todo_app/Screens/dashboard_nav.dart';
-import 'package:trial_todo_app/Screens/login.dart';
+import 'package:trial_todo_app/State/login_controller.dart';
+import 'package:trial_todo_app/State/login_view.dart';
 import 'package:trial_todo_app/Utils/app_Colors.dart';
 import 'package:trial_todo_app/Utils/textStyling.dart';
 import 'package:trial_todo_app/components/custom_checkBox.dart';
@@ -133,7 +134,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       InkWell(
                         onTap: () {
                           Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => const LoginScreen()),
+                          MaterialPageRoute(builder: (context) =>  LoginView(activeController: LoginController(),)),
                           (route) => false);
                         },
                         child: const Text(

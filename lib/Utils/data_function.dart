@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trial_todo_app/Screens/login.dart';
+import 'package:trial_todo_app/State/login_controller.dart';
+import 'package:trial_todo_app/State/login_view.dart';
 import 'package:trial_todo_app/Utils/textStyling.dart';
 
 class DataFunction{
@@ -94,7 +95,7 @@ static customMenuDrawer(BuildContext context){
               title: const Text('Logout'),
               onTap: () {
                 Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => const LoginScreen()),
+            MaterialPageRoute(builder: (context) =>  LoginView(activeController: LoginController(),)),
             (route) => false);
               },
             ),
