@@ -5,6 +5,7 @@ import 'package:quickeydb/quickeydb.dart';
 import 'package:trial_todo_app/Database/Models/task_model.dart';
 import 'package:trial_todo_app/Database/Schema/task_schema.dart';
 import 'package:trial_todo_app/Database/Schema/user_schema.dart';
+import 'package:trial_todo_app/Screens/edit_task.dart';
 import 'package:trial_todo_app/Utils/data_function.dart';
 import 'package:trial_todo_app/widgets/searchBar_widget.dart';
 
@@ -54,9 +55,9 @@ showAlertDialog(BuildContext context, taskItem) {
     onPressed: () {
       Navigator.of(context, rootNavigator: true).pop();
       deleteUserTask(taskItem);
-      setState(() {
-        fetchTasksList();
+      setState(() {        
       });
+      fetchTasksList();
       }
   ); 
 
@@ -186,9 +187,18 @@ showAlertDialog(BuildContext context, taskItem) {
                                      mainAxisAlignment:
                                          MainAxisAlignment.spaceEvenly,
                                      children: [
-                                       const Icon(
-                                         Icons.edit_document,
-                                         size: 25,
+                                       InkWell(
+                                        onTap: ()=> Navigator.of(context).push(MaterialPageRoute(builder: (context)=>EditTaskScreen(
+                                          taskName: snapshot.data![index].taskName,
+                                          taskDesc: snapshot.data![index].description,
+                                          taskEndDate: snapshot.data![index].startDate,
+                                          taskStartDate:snapshot.data![index].endDate, 
+                                          taskId: snapshot.data![index].id,
+                                        ))),
+                                         child: const Icon(
+                                           Icons.edit_document,
+                                           size: 25,
+                                         ),
                                        ),
                                        InkWell(
                                          onTap: ()=> showAlertDialog(context, snapshot.data![index]),

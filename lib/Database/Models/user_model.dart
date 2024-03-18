@@ -5,14 +5,14 @@ class User {
    String? name;
    String? email;
    String? password;
-  //  Task? task;
+   Task? task;
 
    User({
       this.id,
        this.name,
        this.email,
       this.password,
-      // this.task
+      this.task
    });
 
    Map<String, dynamic> toMap() => {
@@ -20,7 +20,7 @@ class User {
       'name': name,
       'email': email,
       'password': password,
-      // 'task': task != null ? task!.toMap() : null,
+      'task': task != null ? task!.toMap() : null,
    };
 
    Map<String, dynamic> toTableMap() => {
@@ -28,13 +28,14 @@ class User {
       'name': name,
       'email': email,
       'password': password,
+      'task': task
    };
 
    User.fromMap(Map<String?, dynamic> map)
            : id = map['id'],
               name = map['name'],
               email = map['email'],
-              password = map['password'];
-              // task = map['task'] != null ? Task.fromMap(map['task']) : null;
+              password = map['password'],
+              task = map['task'] != null ? Task.fromMap(map['task']) : null;
 
 }

@@ -1,3 +1,4 @@
+import 'package:activity/activity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quickeydb/quickeydb.dart';
@@ -7,6 +8,9 @@ import 'package:trial_todo_app/Database/Schema/task_schema.dart';
 import 'package:trial_todo_app/Database/Schema/user_schema.dart';
 import 'package:trial_todo_app/Screens/login.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:trial_todo_app/State/controller.dart';
+import 'package:trial_todo_app/State/login_controller.dart';
+import 'package:trial_todo_app/State/login_view.dart';
 
 Future<void> main() async {
    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -48,7 +52,9 @@ class MyApp extends StatelessWidget {
       /**
        * Splash Screen starts Here
        */
-      home: SplashView(
+      home: Activity(
+        MainController(), 
+        child:SplashView(
         gradient: const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
@@ -63,10 +69,12 @@ class MyApp extends StatelessWidget {
          * Once the splash screen is loaded, Home screen is the loaded next
          */
         done: Done(
-          const LoginScreen(),
+           LoginView( activeController: LoginController(),),
            curve: Curves.linearToEaseOut,
           ),
       ),
+        onActivityStateChanged: ()=>
+            DateTime.now().microsecondsSinceEpoch.toString(),),
       builder: EasyLoading.init(),
     );
   }
