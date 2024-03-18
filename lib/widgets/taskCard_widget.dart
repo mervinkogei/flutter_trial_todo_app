@@ -25,13 +25,10 @@ class TaskCardWidget extends StatelessWidget {
                       Icons.bookmark_add_outlined,
                       size: 40,
                     ),
-                    InkWell(
-                      onTap: () => DataFunction.showAlertDialog(context),
-                      child: const Icon(
-                        Icons.delete_outline_rounded,
-                        color: Colors.red,
-                        size: 25,
-                      ),
+                    const Icon(
+                      Icons.delete_outline_rounded,
+                      color: Colors.red,
+                      size: 25,
                     ),
                   ],
                 ),

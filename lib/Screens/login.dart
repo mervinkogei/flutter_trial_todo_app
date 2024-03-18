@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+// import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:trial_todo_app/Screens/dashboard_nav.dart';
 import 'package:trial_todo_app/Screens/signup.dart';
 import 'package:trial_todo_app/Utils/app_Colors.dart';
@@ -22,12 +22,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   loginUser() {
     if (_formKey.currentState!.validate()) {
-      EasyLoading.show(status: 'loading...');
+      // EasyLoading.show(status: 'loading...');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Processing Data')),
       ).closed.then((value) => 
       Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const DashBoardScreen())));  
-      EasyLoading.dismiss();    
+      // EasyLoading.dismiss();    
     }
     
   }

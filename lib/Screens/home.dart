@@ -5,7 +5,6 @@ import 'package:trial_todo_app/Database/Schema/task_schema.dart';
 import 'package:trial_todo_app/Database/Schema/user_schema.dart';
 import 'package:trial_todo_app/Utils/data_function.dart';
 import 'package:trial_todo_app/widgets/searchBar_widget.dart';
-import 'package:trial_todo_app/widgets/taskCard_widget.dart';
 
 import '../Utils/textStyling.dart';
 
@@ -21,10 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
  late UserSchema userItems;
  List<Task> tasks = [];
 
- checkUser() async{
-  print( await QuickeyDB.getInstance!<UserSchema>()!.findBy({'email': 'mark@gmail.com'}));
- 
- }
 
  Future<void>fetchTasksList() async{
   final response = await QuickeyDB.getInstance!<TaskSchema>()?.all;
@@ -40,9 +35,48 @@ class _HomeScreenState extends State<HomeScreen> {
         }
    }
 
+showAlertDialog(BuildContext context, taskItem) {
+
+    Future<void> deleteUserTask(Task task) async {
+    await QuickeyDB.getInstance!<TaskSchema>()!.delete(task);
+  
+  }
+
+  Widget okButton = ElevatedButton(
+    child: const Text("Delete", style: ThemeStyling.deleteAlert,),
+    onPressed: () =>Navigator.of(context, rootNavigator: true).pop(),
+  ); 
+
+  Widget cancelButton = ElevatedButton(
+    child: const Text("Yes", style: ThemeStyling.acceptAlert,),
+    onPressed: () {
+      Navigator.of(context, rootNavigator: true).pop();
+      deleteUserTask(taskItem);
+      setState(() {
+        fetchTasksList();
+      });
+      }
+  ); 
+
+  AlertDialog alert = AlertDialog(
+    title: const Text("Confirmation Alert!"),
+    content: const Text("Do you still want to proceed with the action."),
+    actions: [
+      okButton,
+      cancelButton,
+    ],
+  );  
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+
+   
 @override
   void initState() {
-    // checkUser();
     fetchTasksList();
     super.initState();
   }
@@ -96,98 +130,99 @@ class _HomeScreenState extends State<HomeScreen> {
                     ' Task List!',
                     style: ThemeStyling.welcomeTitle,
                   ),
-                  InkWell(
-                    onTap: (){
-                      setState(() {
-                        if(itemCounter ==2){
-                          setState(() {
-                            itemCounter = 12;
-                          });
-                        }else{
-                          setState(() {
-                            itemCounter =2;
-                          });
-                        }
-                      });
-
-                    },
-                    child: Text( itemCounter == 2 ? ' see all >': 'Hide ^')),
-                ],
+                  ],
               ),
-              const SizedBox(height: 10,),
-              Container(
-                height:350,
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: GridView.count(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            crossAxisCount: 2,
-                            children: List.generate(tasks.length, (index) {
-                              return Card(
-                                color: Colors.blue[50],
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
+              const SizedBox(height: 10,),         
+              FutureBuilder<List>(
+                        future: QuickeyDB.getInstance!<TaskSchema>()?.all,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+              return Column(
+                children: [
+                  SingleChildScrollView(
+                    child: ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, i) {
+                    // Task item = snapshot.data![i];                  
+                    return GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: 2,
+                        children: List.generate(snapshot.data!.length, (index) {
+                          return Card(
+                            color: Colors.blue[50],
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                 
+                                 Text(
+                                  '${snapshot.data![index].taskName}',
+                                  style: ThemeStyling.taskCardTitle,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                
+                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        const Icon(
-                                          Icons.bookmark_add_outlined,
-                                          size: 40,
-                                        ),
-                                        InkWell(
-                                          onTap: ()=> DataFunction.showAlertDialog(context),
-                                          child: const Icon(
-                                            Icons.delete_outline_rounded,
-                                            color: Colors.red,
-                                            size: 25,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                     Text(
-                                      '${tasks[index].taskName}',
-                                      style: ThemeStyling.taskCardTitle,
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Text('Deadline: '),
-                                        Text('${tasks[index].endDate}'),
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(15))),
-                                          onPressed: () {},
-                                          child: const Text(
-                                            'Complete a Task',
-                                            textAlign: TextAlign.center,
-                                          )),
-                                    )
+                                    Text('Deadline: '),
+                                    Text('${snapshot.data![index].endDate}'),
                                   ],
                                 ),
-                              );
-                            })),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Divider(),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    const Icon(
+                                      Icons.edit_document,
+                                      size: 25,
+                                    ),
+                                    InkWell(
+                                      onTap: ()=> showAlertDialog(context, snapshot.data![index]),
+                                      child: const Icon(
+                                        Icons.delete_outline_rounded,
+                                        color: Colors.red,
+                                        size: 25,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                // Padding(
+                                //   padding: const EdgeInsets.all(8.0),
+                                //   child: ElevatedButton(
+                                //       style: ElevatedButton.styleFrom(
+                                //           shape: RoundedRectangleBorder(
+                                //               borderRadius:
+                                //                   BorderRadius.circular(15))),
+                                //       onPressed: () {},
+                                //       child: const Text(
+                                //         'Complete a Task',
+                                //         textAlign: TextAlign.center,
+                                //       )),
+                                // )
+                              ],
+                            ),
+                          );
+                        }));}),
+                  )
+                ]);
+                          }
+                          return const Center(child: CircularProgressIndicator());
+                          }
+                          )
+
+
+
               // Visibility(
               //   visible: itemCounter == 12? false: true,
               //   child: Column(

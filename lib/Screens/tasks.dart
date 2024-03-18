@@ -54,8 +54,10 @@ addTask() async{
           description: taskDescriptionController.text,
           startDate: startDateController.text,
           endDate: endDateController.text,
-          user: User(name: "vincent", email: "vincentkogei@gmail.com")
-          )).then((value) => 
+          user: null
+          ),
+          
+          ).then((value) => 
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Processing Data')),
           ).closed.then((value) => 

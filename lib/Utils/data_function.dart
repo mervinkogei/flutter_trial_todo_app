@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quickeydb/quickeydb.dart';
+import 'package:trial_todo_app/Database/Models/task_model.dart';
+import 'package:trial_todo_app/Database/Schema/task_schema.dart';
 import 'package:trial_todo_app/Screens/login.dart';
 import 'package:trial_todo_app/Utils/textStyling.dart';
 
@@ -7,15 +10,18 @@ class DataFunction{
   /*
    Added A Custom Alert Dialof functionality
    */
-  static showAlertDialog(BuildContext context) { 
+  static showAlertDialog(BuildContext context) {
+
   Widget okButton = ElevatedButton(
     child: const Text("Delete", style: ThemeStyling.deleteAlert,),
     onPressed: () =>Navigator.of(context, rootNavigator: true).pop(),
   ); 
 
   Widget cancelButton = ElevatedButton(
-    child: const Text("Cancel", style: ThemeStyling.acceptAlert,),
-    onPressed: () =>Navigator.of(context, rootNavigator: true).pop(),
+    child: const Text("Yes", style: ThemeStyling.acceptAlert,),
+    onPressed: () {
+      Navigator.of(context, rootNavigator: true).pop();
+      }
   ); 
 
   AlertDialog alert = AlertDialog(
